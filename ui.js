@@ -31,4 +31,33 @@ class UI {
         <div id="repos"></div>
         `
     }
+
+    showAlert(message, className) {
+        // Clear previous alerts
+        this.clearAlert();
+        // create div with class and text
+        const div = document.createElement('div');
+        div.className = className;
+        div.appendChild(document.createTextNode(message));
+        // Get parent to place element
+        const container = document.querySelector('.search');
+        // Get search box
+        const search = document.getElementById('searchUser');
+        // insert alert
+        container.insertBefore(div, search);
+        // Timeout Alert after 3 Sec
+        setTimeout(() => { this.clearAlert(); }, 3000);
+    }
+
+    //Clear alert message befor showing a new one
+    clearAlert() {
+        const currentAlert = document.querySelector('.alert');
+        if(currentAlert) {
+            currentAlert.remove();
+        }
+    }
+
+    clearProfile() {
+        this.profile.innerHTML = '';
+    }
 }
