@@ -4,13 +4,19 @@ class UI {
     }
 
     showProfile(user){
+        const options = {  
+            weekday: "long", day: "numeric", month: "short", year: "numeric",   
+            hour: "2-digit", minute: "2-digit"  
+        };  
+        let datum = (new Date(user.created_at)).toLocaleDateString('de-DE', options);
+
         this.profile.innerHTML = 
         `
         <div class ="card card-body mb-3">
             <div class="row">
                 <div class="col-md-3">
                     <img class="img-fluid mb-2" src="${user.avatar_url}">
-                    <a href="${user.html_url}" target="_blank" class="btn btn-primary btn-block mb-4">View Profile</a>
+                    <a href="${user.html_url}" target="_blank" class="btn btn-primary btn-block mb-4">Profil anzeigen</a>
                 </div>
                 <div class="col-md-9">
                     <span class="badge badge-primary">Public Repos: ${user.public_repos}</span>
@@ -19,10 +25,10 @@ class UI {
                     <span class="badge badge-info">Following: ${user.following}</span>
                     <br><br>
                     <ul class="list-group">
-                        <li class="list-group-item">Company: ${user.company}</li>
-                        <li class="list-group-item">Website/Blog: ${user.blog}</li>
-                        <li class="list-group-item">Location: ${user.location}</li>
-                        <li class="list-group-item">Member since: ${user.created_at}</li>
+                        <li class="list-group-item">Firma: ${user.company}</li>
+                        <li class="list-group-item">Webseite/Blog: ${user.blog}</li>
+                        <li class="list-group-item">Wohnort: ${user.location}</li>
+                        <li class="list-group-item">Bei GitHub seit: ${datum}</li>
                     </ul>
                 </div>
             </div>
@@ -43,7 +49,7 @@ class UI {
                         <a href="${repo.html_url}" target="_blank">${repo.name}</a>
                     </div>
                     <div class="col-md-6">
-                        <span class="badge badge-primary">Star: ${repo.stargazers_count}</span>
+                        <span class="badge badge-primary">Stars: ${repo.stargazers_count}</span>
                         <span class="badge badge-secondary">Watchers: ${repo.watchers_count}</span>
                         <span class="badge badge-success">Forks: ${repo.forks_count}</span>
                     </div>
